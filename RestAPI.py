@@ -8,11 +8,15 @@ app = Flask(__name__)
 api = Api(app)
 
 # Create parser for the payload data
+parser = reqparse.RequestParser()
+parser.add_argument('data')
+
+# Define how the api will respond to the post requests
 
 
 class IrisClassifier(Resource):
     def post(self):
-        args = parser.parser_args()
+        args = parser.parse_args()
         X = np.array(json.loads(args['data']))
         prediction = model.predict(X)
         return jsonify(prediction.tolist())
