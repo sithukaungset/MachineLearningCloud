@@ -6,10 +6,10 @@ import traceback
 import pandas as pd
 import numpy as np
 
-application = Flask(__name__)
+app = Flask(__name__)
 
 
-@application.route('/prediction', methods=['POST'])
+@app.route('/prediction', methods=['POST'])
 # define function
 def predict():
     if lr:
@@ -23,5 +23,24 @@ def predict():
 
             return jsonify({'prediction': str(predict)})
 
-            except:
+        except:
             return jsonify({'trace': traceback.format_exc()})
+
+    else:
+        print("Model is not good")
+        return ('Model is not good')
+
+
+if __name__ == '__main__':
+    try:
+        port = int(sys.argv[1])
+    except:
+        port = 12345
+
+        lr = joblib.load("randomfs.pkl")
+        print("Model Loaded")
+        rnd_columns = joblib.load("rnd_columns.pkl")
+        # Load "rnd_columns.pkl"
+        print("Model columns loaded")
+
+        app.run(port=port, debug=True)
