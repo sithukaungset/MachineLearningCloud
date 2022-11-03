@@ -1,5 +1,6 @@
 # Install libraries
 from inspect import trace
+import sys
 from flask import Flask, request, jsonify
 import joblib
 import traceback
@@ -35,7 +36,7 @@ if __name__ == '__main__':
     try:
         port = int(sys.argv[1])
     except:
-        port = 12345
+        port = 3002
 
         lr = joblib.load("randomfs.pkl")
         print("Model Loaded")
@@ -43,4 +44,4 @@ if __name__ == '__main__':
         # Load "rnd_columns.pkl"
         print("Model columns loaded")
 
-        app.run(port=port, debug=True)
+        app.run(host="203.247.240.226",port=port, debug=True)
