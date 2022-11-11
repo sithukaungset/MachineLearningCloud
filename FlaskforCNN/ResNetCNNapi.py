@@ -40,4 +40,4 @@ if __name__ == '__main__':
 
     file_name = sys.argv[1]
     results = predict(file_name)
-    print.print(results)
+    pprint.pprint(results)
