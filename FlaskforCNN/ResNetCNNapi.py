@@ -6,14 +6,14 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'  # so that it runs on a mac
 
 def predict(fname):
     """returns top 5 categories for an image.
-    
+
     :param fname : path to the file 
     """
     # ResNet50 is trained on color images with 224x224 pixels
     input_shape = (224, 224, 3)
 
     # load and resize image ----------------------
-    
+
     img = image.load_img(fname, target_size=input_shape[:2])
     x = image.img_to_array(img)
 
