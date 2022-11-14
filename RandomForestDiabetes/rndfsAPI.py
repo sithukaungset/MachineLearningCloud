@@ -10,7 +10,7 @@ import numpy as np
 app = Flask(__name__)
 
 
-@app.route('/prediction', methods=['POST'])
+@app.route('/prediction/diabetes', methods=['POST'])
 # define function
 def predict():
     if lr:
