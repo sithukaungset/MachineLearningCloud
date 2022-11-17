@@ -6,9 +6,10 @@ import joblib
 import traceback
 import pandas as pd
 import numpy as np
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app, supports_credentials=True)
 
 @app.route('/prediction/hairloss', methods=['POST'])
 # define function
@@ -21,7 +22,7 @@ def predict():
             query = query.reindex(columns=model_columns, fill_value=0)
 
             predict = list(model.predict(query))
-
+            print(predict)
             return jsonify({'prediction': str(predict)})
 
         except:

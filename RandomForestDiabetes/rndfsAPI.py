@@ -6,8 +6,11 @@ import joblib
 import traceback
 import pandas as pd
 import numpy as np
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
+
 
 
 @app.route('/prediction/diabetes', methods=['POST'])
@@ -21,8 +24,9 @@ def predict():
             query = query.reindex(columns=rnd_columns, fill_value=0)
 
             predict = list(lr.predict(query))
-
+            print(predict)
             return jsonify({'prediction': str(predict)})
+            
 
         except:
             return jsonify({'trace': traceback.format_exc()})
@@ -36,7 +40,7 @@ if __name__ == '__main__':
     try:
         port = int(sys.argv[1])
     except:
-        port = 3002
+        port = 3006
 
         lr = joblib.load("randomfs.pkl")
         print("Model Loaded")
