@@ -28,6 +28,7 @@ class Image(Resource):
         output = {'top_categories': []}
         for _, categ, score in results:
             output['top_categories'].append((categ, float(score)))
+            print(output)
         return output
 
 
